@@ -9,7 +9,7 @@ const cypherGrammar = JSON.parse(
   fs.readFileSync(path.resolve("./src/styles/cypher.tmLanguage.json"), "utf8")
 );
 
-const repoName = process.env.REPO_NAME || "koredb-docs";
+const repoName = process.env.REPO_NAME || "docs";
 const groupName = process.env.REPO_OWNER || "bighorndb";
 const domain = `${groupName}.github.io`;
 const site = `https://${domain}`;
@@ -243,22 +243,6 @@ export default defineConfig({
                 },
               ],
             },
-            {
-              label: "Third-party integrations",
-              collapsed: true,
-              items: [
-                {
-                  label: "G.V()",
-                  link: "/visualization/third-party-integrations/gdotv",
-                  badge: { text: "New" },
-                },
-                {
-                  label: "yFiles Jupyter Graphs",
-                  link: "/visualization/third-party-integrations/yfiles",
-                  badge: { text: "New" },
-                },
-              ],
-            },
           ],
         },
         {
@@ -319,11 +303,6 @@ export default defineConfig({
             {
               label: "Ruby",
               link: "/client-apis/ruby",
-              badge: { text: "Community", variant: "caution" },
-            },
-            {
-              label: "Nim",
-              link: "/client-apis/nim",
               badge: { text: "Community", variant: "caution" },
             },
           ],
