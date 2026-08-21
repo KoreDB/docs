@@ -25,11 +25,11 @@ export default defineConfig({
   integrations: [
     sitemap(),
     starlight({
-      favicon: "/img/favicon.ico",
+      favicon: "/icons/favicon.svg",
       title: repoName,
       logo: {
-        light: "/src/assets/logo/koredb-logo.png",
-        dark: "/src/assets/logo/koredb-logo-inverse.png",
+        light: "/src/assets/logo/koredb-logo.svg",
+        dark: "/src/assets/logo/koredb-logo-inverse.svg",
         replacesTitle: true,
       },
       social: {
@@ -45,6 +45,24 @@ export default defineConfig({
         },
       },
       head: [
+        // Icon fallbacks for clients that don't take the SVG favicon
+        {
+          tag: "link",
+          attrs: {
+            rel: "icon",
+            href: base + "/icons/favicon.ico",
+            sizes: "16x16 32x32 48x48",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+            href: base + "/icons/apple-touch-icon.png",
+          },
+        },
+
         // Basic OG tags
         {
           tag: "meta",
