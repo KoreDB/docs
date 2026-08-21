@@ -9,7 +9,7 @@ const cypherGrammar = JSON.parse(
   fs.readFileSync(path.resolve("./src/styles/cypher.tmLanguage.json"), "utf8")
 );
 
-const repoName = process.env.REPO_NAME || "kuzu-docs";
+const repoName = process.env.REPO_NAME || "koredb-docs";
 const groupName = process.env.REPO_OWNER || "bighorndb";
 const domain = `${groupName}.github.io`;
 const site = `https://${domain}`;
@@ -28,8 +28,8 @@ export default defineConfig({
       favicon: "/img/favicon.ico",
       title: repoName,
       logo: {
-        light: "/src/assets/logo/kuzu-logo.png",
-        dark: "/src/assets/logo/kuzu-logo-inverse.png",
+        light: "/src/assets/logo/koredb-logo.png",
+        dark: "/src/assets/logo/koredb-logo-inverse.png",
         replacesTitle: true,
       },
       social: {
@@ -56,14 +56,14 @@ export default defineConfig({
         },
         {
           tag: "meta",
-          attrs: { property: "og:title", content: "Kuzu - Graph Database" },
+          attrs: { property: "og:title", content: "KoreDB - Graph Database" },
         },
         {
           tag: "meta",
           attrs: {
             property: "og:description",
             content:
-              "Documentation for Kuzu, an open source, embedded graph database",
+              "Documentation for KoreDB, an open source, embedded graph database",
           },
         },
         {
@@ -86,14 +86,14 @@ export default defineConfig({
         },
         {
           tag: "meta",
-          attrs: { name: "twitter:title", content: "Kuzu - Graph Database" },
+          attrs: { name: "twitter:title", content: "KoreDB - Graph Database" },
         },
         {
           tag: "meta",
           attrs: {
             name: "twitter:description",
             content:
-              "Documentation for Kuzu, an open source, embedded graph database",
+              "Documentation for KoreDB, an open source, embedded graph database",
           },
         },
         {
@@ -133,10 +133,10 @@ export default defineConfig({
           link: "/",
         },
         {
-          label: "Install Kuzu",
+          label: "Install KoreDB",
           collapsed: true,
           items: [
-            { label: "Install Kuzu", link: "/installation" },
+            { label: "Install KoreDB", link: "/installation" },
             { label: "System requirements", link: "/system-requirements" },
           ],
         },
@@ -218,28 +218,28 @@ export default defineConfig({
           collapsed: true,
           items: [
             {
-              label: "Kuzu Explorer",
+              label: "KoreDB Explorer",
               collapsed: true,
               items: [
                 {
-                  label: "Intro to Kuzu Explorer",
-                  link: "/visualization/kuzu-explorer",
+                  label: "Intro to KoreDB Explorer",
+                  link: "/visualization/koredb-explorer",
                 },
                 {
                   label: "Query panel",
-                  link: "/visualization/kuzu-explorer/query-panel",
+                  link: "/visualization/koredb-explorer/query-panel",
                 },
                 {
                   label: "Schema panel",
-                  link: "/visualization/kuzu-explorer/schema-panel",
+                  link: "/visualization/koredb-explorer/schema-panel",
                 },
                 {
                   label: "Import panel",
-                  link: "/visualization/kuzu-explorer/import-panel",
+                  link: "/visualization/koredb-explorer/import-panel",
                 },
                 {
                   label: "Settings panel",
-                  link: "/visualization/kuzu-explorer/settings-panel",
+                  link: "/visualization/koredb-explorer/settings-panel",
                 },
               ],
             },
@@ -328,13 +328,13 @@ export default defineConfig({
             },
           ],
         },
-        { label: "Kuzu-Wasm", link: "/client-apis/wasm" },
+        { label: "KoreDB-Wasm", link: "/client-apis/wasm" },
         { label: "Connections & concurrency", link: "/concurrency" },
         {
           label: "Developer guide",
           collapsed: true,
           items: [
-            { label: "Build Kuzu from source", link: "/developer-guide" },
+            { label: "Build KoreDB from source", link: "/developer-guide" },
             {
               label: "Performance debugging",
               link: "/developer-guide/performance-debugging",
@@ -390,8 +390,8 @@ export default defineConfig({
               ],
             },
             {
-              label: "External Kuzu databases",
-              link: "/extensions/attach/kuzu",
+              label: "External KoreDB databases",
+              link: "/extensions/attach/koredb",
             },
             { label: "Full-text search", link: "/extensions/full-text-search" },
             {

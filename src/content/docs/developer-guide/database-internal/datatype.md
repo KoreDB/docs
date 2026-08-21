@@ -1,9 +1,9 @@
 ---
 title: Data type classes
-description: "Understanding LogicalType and PhysicalType classes in Kuzu's internal architecture"
+description: "Understanding LogicalType and PhysicalType classes in KoreDB's internal architecture"
 ---
 
-There are two data type classes in Kuzu, `LogicalType` and `PhysicalType`.
+There are two data type classes in KoreDB, `LogicalType` and `PhysicalType`.
 
 ## LogicalType
 

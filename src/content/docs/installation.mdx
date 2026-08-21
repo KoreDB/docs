@@ -1,6 +1,6 @@
 ---
-title: Install Kuzu
-description: Installation guide for Kuzu graph database across different platforms and programming languages with package managers.
+title: Install KoreDB
+description: Installation guide for KoreDB graph database across different platforms and programming languages with package managers.
 ---
 
 <div class="padauk-regular">
@@ -12,83 +12,83 @@ import { Code } from 'astro-expressive-code/components';
 export const DOWNLOAD_LINKS = {
   cli:{
     linux: `# x86-64
-curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/kuzu_cli-linux-x86_64.tar.gz
+curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-linux-x86_64.tar.gz
 # aarch64
-curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/kuzu_cli-linux-aarch64.tar.gz
+curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-linux-aarch64.tar.gz
 
-tar xzf kuzu_cli-*.tar.gz`,
-macos: `curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/kuzu_cli-osx-universal.tar.gz
-tar xzf kuzu_cli-*.tar.gz
-./kuzu`,
-win: `curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/kuzu_cli-windows-x86_64.zip`,
-winUrl: `https://github.com/kuzudb/kuzu/releases/download/v${version}/kuzu_cli-windows-x86_64.zip`,
+tar xzf koredb_cli-*.tar.gz`,
+macos: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-osx-universal.tar.gz
+tar xzf koredb_cli-*.tar.gz
+./koredb`,
+win: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-windows-x86_64.zip`,
+winUrl: `https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-windows-x86_64.zip`,
   },
 java: `<dependency>
-  <groupId>com.kuzudb</groupId>
-  <artifactId>kuzu</artifactId>
+  <groupId>com.koredb</groupId>
+  <artifactId>koredb</artifactId>
   <version>${version}</version>
 </dependency>
 `,
 cxx: {
     linux: `# x86-64
-curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/libkuzu-linux-x86_64.tar.gz
+curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-linux-x86_64.tar.gz
 # aarch64
-curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/libkuzu-linux-aarch64.tar.gz
+curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-linux-aarch64.tar.gz
 
-tar xzf libkuzu-*.tar.gz`,
-    macos: `curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/libkuzu-osx-universal.tar.gz
+tar xzf libkoredb-*.tar.gz`,
+    macos: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-osx-universal.tar.gz
 
-tar xzf libkuzu-*.tar.gz`,
-    win: `curl -L -O https://github.com/kuzudb/kuzu/releases/download/v${version}/libkuzu-windows-x86_64.zip`
+tar xzf libkoredb-*.tar.gz`,
+    win: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-windows-x86_64.zip`
 },
-go: `go get github.com/kuzudb/go-kuzu@v${version}`,
+go: `go get github.com/KoreDB/go-koredb@v${version}`,
 swift: `dependencies: [
-  .package(url: "https://github.com/kuzudb/kuzu-swift/", branch: "${version}"),
+  .package(url: "https://github.com/KoreDB/koredb-swift/", branch: "${version}"),
 ],`
 }
 
-Kuzu is an embedded graph database that can be used from the command line and from
-a variety of programming languages. This page shows all the ways you can install Kuzu.
-After installation, you can learn how to run Kuzu by [creating your first graph](/get-started).
+KoreDB is an embedded graph database that can be used from the command line and from
+a variety of programming languages. This page shows all the ways you can install KoreDB.
+After installation, you can learn how to run KoreDB by [creating your first graph](/get-started).
 
 :::note[License]
-All source code and pre-compiled binaries of Kuzu are distributed under the [MIT License](https://github.com/kuzudb/kuzu/blob/master/LICENSE). By installing and using Kuzu, you acknowledge and agree to these terms.
+All source code and pre-compiled binaries of KoreDB are distributed under the [MIT License](https://github.com/KoreDB/koredb/blob/master/LICENSE). By installing and using KoreDB, you acknowledge and agree to these terms.
 :::
 
 ## Command Line (Shell)
 
-If you don't need Kuzu embedded in your application, you can use the CLI shell. This is a standalone
-executable with no dependencies that can be used to interact with a Kuzu database using just Cypher.
+If you don't need KoreDB embedded in your application, you can use the CLI shell. This is a standalone
+executable with no dependencies that can be used to interact with a KoreDB database using just Cypher.
 
 <Tabs syncKey="cli">
 <TabItem label="Linux">
 
-Use a tool like `curl` to download the latest version of the Kuzu CLI to your local machine.
+Use a tool like `curl` to download the latest version of the KoreDB CLI to your local machine.
 <Code code={DOWNLOAD_LINKS.cli.linux} lang="bash" frame="terminal"/>
 
-Now you can run Kuzu from the command line.
+Now you can run KoreDB from the command line.
 
 ```bash
-./kuzu
+./koredb
 ```
 
 </TabItem>
 
 <TabItem label="macOS">
 
-You can install the Kuzu CLI using Homebrew.
+You can install the KoreDB CLI using Homebrew.
 
 ```bash
-brew install kuzu
+brew install koredb
 ```
 
-You can now run Kuzu from the command line.
+You can now run KoreDB from the command line.
 
 ```bash
-kuzu
+koredb
 ```
 
-Alternatively, you can download the Kuzu CLI directly.
+Alternatively, you can download the KoreDB CLI directly.
 
 <Code code={DOWNLOAD_LINKS.cli.macos} lang="bash" frame="terminal"/>
 
@@ -96,35 +96,35 @@ Alternatively, you can download the Kuzu CLI directly.
 
 <TabItem label="Windows">
 
-Use a tool like `curl` to download the latest version of the Kuzu CLI to your local machine. Alternatively,
+Use a tool like `curl` to download the latest version of the KoreDB CLI to your local machine. Alternatively,
 simply open 
 <a href={DOWNLOAD_LINKS.cli.winUrl} target="_blank">this URL</a> in your browser.
 
 <Code code={DOWNLOAD_LINKS.cli.win} lang="bash" frame="terminal"/>
 
-Right-click on the `kuzu_cli-xxx.zip` file and click on **Extract All**. This will create a directory
-containing a file named `kuzu.exe`. Then, right-click on the directory and click "Open in terminal".
-From within the terminal, you can then run `./kuzu.exe`.
+Right-click on the `koredb_cli-xxx.zip` file and click on **Extract All**. This will create a directory
+containing a file named `koredb.exe`. Then, right-click on the directory and click "Open in terminal".
+From within the terminal, you can then run `./koredb.exe`.
 
 </TabItem>
 
 <TabItem label="Nix">
 
-On Linux, macOS, and WSL2, you can also use [`Nix`](https://nixos.org/learn) to run the Kuzu CLI.
+On Linux, macOS, and WSL2, you can also use [`Nix`](https://nixos.org/learn) to run the KoreDB CLI.
 
-Run Kuzu in a temporary shell:
+Run KoreDB in a temporary shell:
 
 ```bash
-nix-shell -p kuzu
-kuzu
+nix-shell -p koredb
+koredb
 ```
 
-Alternatively, you can install Kuzu declaratively using [NixOS](https://nixos.org/manual/nixos/stable/#sec-package-management) or [Home Manager](https://github.com/nix-community/home-manager) configuration:
+Alternatively, you can install KoreDB declaratively using [NixOS](https://nixos.org/manual/nixos/stable/#sec-package-management) or [Home Manager](https://github.com/nix-community/home-manager) configuration:
 
 ```nix
 {
-  environment.systemPackages = [ pkgs.kuzu ]; // NixOS
-  home.packages = [ pkgs.kuzu ];              // Home Manager
+  environment.systemPackages = [ pkgs.koredb ]; // NixOS
+  home.packages = [ pkgs.koredb ];              // Home Manager
 }
 ```
 
@@ -134,7 +134,7 @@ Alternatively, you can install Kuzu declaratively using [NixOS](https://nixos.or
 
 ## Python
 
-You can use `uv`, `pip`, or `nix` to install the Kuzu Python client library.
+You can use `uv`, `pip`, or `nix` to install the KoreDB Python client library.
 The instructions are the same for Linux, macOS, and Windows.
 
 <Tabs syncKey="python-package-manager">
@@ -143,7 +143,7 @@ The instructions are the same for Linux, macOS, and Windows.
 
 ```bash
 uv init
-uv add kuzu
+uv add koredb
 ```
 
 </TabItem>
@@ -151,7 +151,7 @@ uv add kuzu
 <TabItem label="pip">
 
 ```bash
-pip install kuzu
+pip install koredb
 ```
 
 </TabItem>
@@ -159,7 +159,7 @@ pip install kuzu
 <TabItem label="nix">
 
 ```bash
-nix-shell -p "python3.withPackages (ps: [ ps.kuzu ])"
+nix-shell -p "python3.withPackages (ps: [ ps.koredb ])"
 ```
 
 </TabItem>
@@ -168,49 +168,49 @@ nix-shell -p "python3.withPackages (ps: [ ps.kuzu ])"
 
 ## Node.js
 
-Use `npm` to install the Kuzu Node.js client library.
+Use `npm` to install the KoreDB Node.js client library.
 
 ```bash
-npm install kuzu
+npm install koredb
 ```
 
 ## Java
 
-The latest stable version is available on [Maven Central](https://central.sonatype.com/artifact/com.kuzudb/kuzu).
+The latest stable version is available on [Maven Central](https://central.sonatype.com/artifact/com.koredb/koredb).
 
 <Code code={DOWNLOAD_LINKS.java} lang="xml" frame="terminal"/>
 
 ## Rust
 
-Use Cargo to install the Kuzu Rust client library. This will by default build and statically link Kuzu's C++
-library from source. You can also link against the dynamic release libraries, as described in the [crate docs](https://docs.rs/kuzu/latest/kuzu/#building).
+Use Cargo to install the KoreDB Rust client library. This will by default build and statically link KoreDB's C++
+library from source. You can also link against the dynamic release libraries, as described in the [crate docs](https://docs.rs/koredb/latest/koredb/#building).
 
 ```bash
-cargo add kuzu
+cargo add koredb
 ```
 
 ## Go
 
-Kuzu's Go API is a wrapper around the C API of Kuzu. The installation step below assumes that you have
+KoreDB's Go API is a wrapper around the C API of KoreDB. The installation step below assumes that you have
 initialized a Go project that has a `go.mod` file, as described in [the official tutorial](https://go.dev/doc/tutorial/create-module).
 
 <Code code={DOWNLOAD_LINKS.go} lang="bash" frame="terminal"/>
 
 ## Swift
 
-To add `kuzu-swift` to your Swift project, you can use the Swift package manager.
+To add `koredb-swift` to your Swift project, you can use the Swift package manager.
 1. Add the package to your Package.swift dependencies.
     <Code code={DOWNLOAD_LINKS.swift} lang="swift" frame="terminal"/>
 
     You can change the branch to a tag to use a specific version (e.g., {version} for the latest stable release or `main` for the latest development version).
 
-2. Add `Kuzu` to your target dependencies.
+2. Add `KoreDB` to your target dependencies.
     ```swift
     targets: [
       .target(
         name: "YourTargetName",
         dependencies: [
-          .product(name: "Kuzu", package: "kuzu-swift"),
+          .product(name: "KoreDB", package: "koredb-swift"),
         ]
       )
     ]
@@ -219,15 +219,15 @@ To add `kuzu-swift` to your Swift project, you can use the Swift package manager
 Alternatively, you can add the package through Xcode:
 1. Open your Xcode project.
 2. Go to `File` > `Add Packages Dependencies...`.
-3. Enter the URL of the kuzu-swift repository: `https://github.com/kuzudb/kuzu-swift`.
+3. Enter the URL of the koredb-swift repository: `https://github.com/KoreDB/koredb-swift`.
 4. Select the version you want to use (e.g., {version} for the latest stable release or `main` for the latest development version).
 
 
 ## C/C++
 
-Use a tool like `curl` to download the latest version of the Kuzu C/C++ binaries to your local machine.
+Use a tool like `curl` to download the latest version of the KoreDB C/C++ binaries to your local machine.
 
-The Kuzu C++ client is distributed as a so/dylib/dll+lib library file along with a header file (`kuzu.hpp`).
+The KoreDB C++ client is distributed as a so/dylib/dll+lib library file along with a header file (`koredb.hpp`).
 Once you've downloaded and extracted the C++ files into a directory, you can link it to your C++
 program by adding the directory to your build system's search paths.
 
@@ -254,26 +254,26 @@ program by adding the directory to your build system's search paths.
 
 </Tabs>
 
-## Kuzu Explorer
+## KoreDB Explorer
 
-Kuzu Explorer is a web-based GUI for Kuzu. It allows you to explore and query your Kuzu database
-using a web browser. Refer to the Kuzu Explorer [GitHub repo](https://github.com/kuzudb/explorer)
+KoreDB Explorer is a web-based GUI for KoreDB. It allows you to explore and query your KoreDB database
+using a web browser. Refer to the KoreDB Explorer [GitHub repo](https://github.com/KoreDB/explorer)
 for more details.
 
-## Kuzu MCP Server
+## KoreDB MCP Server
 
 Our [Model Context Protocol](https://modelcontextprotocol.io/introduction) server allows you to expose
-your Kuzu database as a tool that can be used by LLMs and agents.
-Refer to the Kuzu-MCP [GitHub repo](https://github.com/kuzudb/kuzu-mcp-server) for more details.
+your KoreDB database as a tool that can be used by LLMs and agents.
+Refer to the KoreDB-MCP [GitHub repo](https://github.com/KoreDB/koredb-mcp-server) for more details.
 
 ## Nightly Builds
 
 If you want access to the latest features in development, you can use our nightly builds.
 
-- Python: `uv pip install --pre kuzu`
-- Node.js: `npm i kuzu@next`
-- Java: The latest snapshot version is available on [GitHub Packages](https://github.com/kuzudb/kuzu/packages/2258307)
+- Python: `uv pip install --pre koredb`
+- Node.js: `npm i koredb@next`
+- Java: The latest snapshot version is available on [GitHub Packages](https://github.com/KoreDB/koredb/packages/2258307)
 - For the CLI, C/C++ shared libraries, and Rust crate, the latest nightly versions for each can be
-downloaded from the latest run of [this GitHub Actions workflow](https://github.com/kuzudb/kuzu/actions/workflows/build-and-deploy.yml).
+downloaded from the latest run of [this GitHub Actions workflow](https://github.com/KoreDB/koredb/actions/workflows/build-and-deploy.yml).
 
 </div>

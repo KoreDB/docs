@@ -5,13 +5,13 @@ title: yFiles Jupyter Graphs for Kuzu
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 [yFiles Jupyter Graphs for Kuzu](https://github.com/yWorks/yfiles-jupyter-graphs-for-kuzu) is an
-open source Jupyter notebook widget that allows you to visualize Kuzu graphs from inside your Jupyter notebooks.
+open source Jupyter notebook widget that allows you to visualize KoreDB graphs from inside your Jupyter notebooks.
 It leverages the larger *yFiles Jupyter Graphs* ecosystem from [yWorks](https://www.yworks.com/products/yfiles-graphs-for-jupyter).
 
 When working interactively in Python, it's common to use the `ipykernel` package to open a Jupyter
 kernel in your IDE like VSCode or Cursor. Alternatively, a lot of users prefer to use Jupyter Lab,
 an interactive computing environment for Python. The yFiles Jupyter Graphs widget is designed for these
-use cases, allowing users working in Python to visualize Kuzu graphs in their Jupyter notebooks. See
+use cases, allowing users working in Python to visualize KoreDB graphs in their Jupyter notebooks. See
 [their GitHub page](https://github.com/yWorks/yfiles-jupyter-graphs/tree/main?tab=readme-ov-file#supported-environments)
 for a list of supported environments.
 
@@ -23,17 +23,17 @@ The yFiles Jupyter Graphs widget can be installed using `uv` or `pip`:
 <TabItem label="uv">
 
 ```bash
-# Install kuzu as a pre-requisite
+# Install koredb as a pre-requisite
 uv init
-uv add kuzu yfiles-jupyter-graphs-for-kuzu
+uv add koredb yfiles-jupyter-graphs-for-kuzu
 ```
 
 </TabItem>
 <TabItem label="pip">
 
 ```bash
-# Install kuzu as a pre-requisite
-pip install kuzu yfiles-jupyter-graphs-for-kuzu
+# Install koredb as a pre-requisite
+pip install koredb yfiles-jupyter-graphs-for-kuzu
 ```
 
 </TabItem>
@@ -46,11 +46,11 @@ table `Person`, and one relationship table `MENTORED`, which describes who mento
 Each person has a `name` and an `alias`, which is the name they are best known by.
 
 ```py
-import kuzu
+import koredb
 from yfiles_jupyter_graphs_for_kuzu import KuzuGraphWidget
 # Open a new in-memory database
-db = kuzu.Database(":memory:")
-conn = kuzu.Connection(db)
+db = koredb.Database(":memory:")
+conn = koredb.Connection(db)
 # Create tables
 conn.execute("CREATE NODE TABLE Person(name STRING PRIMARY KEY, alias STRING)")
 conn.execute("CREATE REL TABLE MENTORED(FROM Person TO Person)")
@@ -87,7 +87,7 @@ The widget will display the entire graph, with all nodes and relationships in th
 
 :::caution[Limit the number of results]
 The yFiles Jupyter Graphs widget is not designed to display a large number of nodes and relationships.
-It uses Kuzu's Python API under the hood to fetch the data as Python objects, which can be slow for
+It uses KoreDB's Python API under the hood to fetch the data as Python objects, which can be slow for
 large graphs. As a result, we recommend limiting the number of results returned by the Cypher query
 to a few hundred at most.
 :::
@@ -153,7 +153,7 @@ data on the fly!
 
 ## Directed vs. undirected relationships
 
-Kuzu stores all relationships as directed, but the yFiles Jupyter Graphs widget allows you to
+KoreDB stores all relationships as directed, but the yFiles Jupyter Graphs widget allows you to
 visualize them as undirected. The default behaviour in yFiles is to visualize graphs as directed,
 based on the source and target node IDs in each item of the result set.
 
