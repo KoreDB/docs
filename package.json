@@ -8,7 +8,7 @@
     "build": "npm run generate-llms && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check-links": "CHECK_LINKS=true astro build",
+    "check-links": "node scripts/check-links.cjs",
     "generate-icons": "node scripts/generate-icons.ts",
     "generate-llms": "node scripts/generate-llms.cjs",
     "update-version": "node scripts/update-version.cjs"
