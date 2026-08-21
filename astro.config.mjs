@@ -4,6 +4,7 @@ import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
 import fs from "fs";
 import path from "path";
+import remarkBasePath from "./src/plugins/remark-base-path.ts";
 
 const cypherGrammar = JSON.parse(
   fs.readFileSync(path.resolve("./src/styles/cypher.tmLanguage.json"), "utf8")
@@ -22,6 +23,15 @@ process.env.ASTRO_TELEMETRY_DISABLED = "1";
 export default defineConfig({
   site,
   base,
+  // Content links internal pages as `/get-started`; prefix `base` at build time
+  // so the emitted HTML is correct without relying on `public/fix-base.js`.
+  // Must stay a remark plugin: starlight-links-validator appends its own remark
+  // collector after these, so rewriting here is what the link check sees too.
+  // MDX inherits these plugins (`extendMarkdownConfig` defaults to true), and
+  // they must be passed by reference — string plugin names are ignored there.
+  markdown: {
+    remarkPlugins: [[remarkBasePath, { base }]],
+  },
   integrations: [
     sitemap(),
     starlight({
