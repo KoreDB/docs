@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>KoreDB icons</title>
+<style>
+:root {
+  --ember: #dc6428;
+  --ember-lit: #e0743e;
+  --ink: #17181c;
+  --chalk: #edeef3;
+  --mist: #888c96;
+
+  --bg: #ffffff;
+  --surface: #fbfaf9;
+  --surface-2: #f2efec;
+  --text: #24262c;
+  --muted: #6d7079;
+  --hairline: #e2ddd8;
+  --accent: #c8571d;
+  --code-bg: #f4f1ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181c;
+    --surface: #1d1f25;
+    --surface-2: #23262f;
+    --text: #d7d9de;
+    --muted: #888c96;
+    --hairline: #2c3039;
+    --accent: #e0743e;
+    --code-bg: #202329;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.wrap { max-width: 940px; margin: 0 auto; padding: 0 24px 96px; }
+
+/* ---- header ---- */
+.masthead {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  padding: 48px 0 28px; border-bottom: 1px solid var(--hairline);
+}
+.masthead img { width: 56px; height: 56px; }
+.masthead h1 { margin: 0; font-size: 30px; letter-spacing: -0.02em; }
+.masthead p { margin: 4px 0 0; color: var(--muted); max-width: 56ch; }
+.masthead .cmd { margin-left: auto; }
+
+nav.toc {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  padding: 14px 0; border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; background: var(--bg); z-index: 5;
+}
+nav.toc a {
+  font-size: 13px; text-decoration: none; color: var(--muted);
+  padding: 5px 10px; border-radius: 4px;
+}
+nav.toc a:hover { color: var(--text); background: var(--surface-2); }
+
+section { padding-top: 56px; }
+h2 {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted); font-weight: 600; margin: 0 0 20px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--hairline);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+h3 { font-size: 15px; margin: 28px 0 12px; letter-spacing: -0.01em; }
+p { max-width: 68ch; }
+
+/* ---- mark showcase ---- */
+.showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.plate {
+  border: 1px solid var(--hairline); border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.plate .stage {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  padding: 36px 20px; min-height: 132px;
+}
+.stage--light { background: var(--chalk); }
+.stage--dark { background: var(--ink); }
+.plate figcaption {
+  font-size: 12px; color: var(--muted); padding: 9px 12px;
+  border-top: 1px solid var(--hairline); background: var(--surface);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ---- spec table ---- */
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+th { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+td.num, th.num { font-family: ui-monospace, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+.scroll { overflow-x: auto; }
+
+/* ---- palette ---- */
+.palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.chip { border: 1px solid var(--hairline); border-radius: 6px; overflow: hidden; }
+.chip .fill { height: 58px; }
+.chip .meta { padding: 9px 11px; font-size: 12px; line-height: 1.6; background: var(--surface); }
+.chip .meta b { display: block; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; }
+.chip .meta span { color: var(--muted); }
+
+/* ---- file cards ---- */
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 12px; }
+.file {
+  border: 1px solid var(--hairline); border-radius: 6px; overflow: hidden;
+  background: var(--surface); display: flex; flex-direction: column;
+}
+.file .thumb {
+  display: flex; align-items: center; justify-content: center;
+  height: 104px; background: var(--surface-2);
+}
+.file .thumb--dark { background: var(--ink); }
+.file .thumb--light { background: var(--chalk); }
+.file .thumb img { max-width: 76%; max-height: 72px; }
+.file .thumb img.round { border-radius: 50%; }
+.file .body { padding: 10px 12px 12px; border-top: 1px solid var(--hairline); }
+.file .name {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px;
+  color: var(--text); background: none; border: 0; padding: 0; cursor: pointer;
+  text-align: left; word-break: break-all;
+}
+.file .name:hover { color: var(--accent); }
+.file .desc { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; line-height: 1.5; }
+.file .dim {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px;
+  color: var(--muted); margin-top: 6px; display: block;
+}
+
+/* ---- code ---- */
+.code {
+  position: relative; background: var(--code-bg); border: 1px solid var(--hairline);
+  border-radius: 6px; margin: 0 0 16px;
+}
+.code pre { margin: 0; padding: 16px 18px; overflow-x: auto; font-size: 13px; line-height: 1.7; }
+.code .copy {
+  position: absolute; top: 8px; right: 8px; font-size: 11px; padding: 4px 9px;
+  border: 1px solid var(--hairline); border-radius: 4px; background: var(--bg);
+  color: var(--muted); cursor: pointer; font-family: inherit;
+}
+.code .copy:hover { color: var(--text); border-color: var(--muted); }
+.cmd code {
+  background: var(--code-bg); border: 1px solid var(--hairline); border-radius: 5px;
+  padding: 7px 12px; font-size: 13px; display: inline-block;
+}
+
+.note {
+  border-left: 2px solid var(--accent); background: var(--surface);
+  padding: 12px 18px; border-radius: 0 5px 5px 0; margin: 18px 0 0; font-size: 14.5px;
+}
+.note p { margin: 0; }
+
+footer {
+  margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--muted);
+}
+
+.toast {
+  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(12px);
+  background: var(--ink); color: var(--chalk); padding: 9px 18px; border-radius: 5px;
+  font-size: 13px; opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s;
+}
+@media (prefers-color-scheme: dark) { .toast { background: var(--chalk); color: var(--ink); } }
+.toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <img src="./favicon.svg" alt="KoreDB mark">
+  <div>
+    <h1>KoreDB icons</h1>
+    <p>Every file in this directory is generated from one geometric source. Edit the geometry, regenerate, commit — never hand-edit the output.</p>
+  </div>
+  <div class="cmd"><code>yarn generate-icons</code></div>
+</header>
+
+<nav class="toc">
+  <a href="#mark">The mark</a>
+  <a href="#geometry">Geometry</a>
+  <a href="#palette">Palette</a>
+  <a href="#files">Files</a>
+  <a href="#usage">Usage</a>
+  <a href="#rules">Rules</a>
+</nav>
+
+<section id="mark">
+  <h2>The mark</h2>
+  <p>A letter <strong>K</strong> whose strokes are graph edges: the terminals close into nodes, and
+  the joint where the strokes converge is replaced by a core. The brand initial, the graph, and the
+  idea of a database core are the same shape — nothing is bolted on.</p>
+
+  <div class="showcase">
+    <figure class="plate" style="margin:0">
+      <div class="stage stage--light"><img src="./koredb-mark.svg" width="84" height="84" alt="Mark on light"></div>
+      <figcaption>koredb-mark.svg — light grounds</figcaption>
+    </figure>
+    <figure class="plate" style="margin:0">
+      <div class="stage stage--dark"><img src="./koredb-mark-inverse.svg" width="84" height="84" alt="Mark on dark"></div>
+      <figcaption>koredb-mark-inverse.svg — dark grounds</figcaption>
+    </figure>
+    <figure class="plate" style="margin:0">
+      <div class="stage stage--light">
+        <img src="./favicon-48x48.png" width="48" height="48" alt="48px">
+        <img src="./favicon-32x32.png" width="32" height="32" alt="32px">
+        <img src="./favicon-16x16.png" width="16" height="16" alt="16px">
+      </div>
+      <figcaption>48 / 32 / 16 px, actual size</figcaption>
+    </figure>
+  </div>
+
+  <h3>Three cuts, one mark</h3>
+  <p>Stroke weight that reads well at 512px collapses at 16px, so each size band gets its own cut.
+  The generator picks the right one automatically.</p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Band</th><th class="num">Edge</th><th class="num">Node r</th><th>Core</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>48px and up</td><td class="num">2.6</td><td class="num">3.2</td><td>ring r 4.3 / stroke 2.4 + nucleus r 1.5</td><td>Full detail.</td></tr>
+        <tr><td>32px</td><td class="num">3.0</td><td class="num">3.4</td><td>ring r 4.2 / stroke 2.8 + nucleus r 1.7</td><td>Heavier strokes; core detail still resolves.</td></tr>
+        <tr><td>16px</td><td class="num">3.2</td><td class="num">3.5</td><td>solid disc r 4.2</td><td>The ring would land on ~1px and turn to mush. Solid core also frees up spine length, so the K reads better.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="geometry">
+  <h2>Geometry</h2>
+  <p>Drawn on a 32 × 32 grid. All values below are in grid units — scale them by
+  <code>size / 32</code> for any target size.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Property</th><th class="num">Value</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Canvas</td><td class="num">32 × 32</td><td>Nominal grid for every square asset.</td></tr>
+        <tr><td>Ink box</td><td class="num">21.7 × 27.2</td><td>~85% of canvas height; the remainder is breathing room.</td></tr>
+        <tr><td>Spine</td><td class="num">x = 9.5</td><td>Vertical axis of the K, broken where the core sits.</td></tr>
+        <tr><td>Arms</td><td class="num">→ x = 22.5</td><td>Terminals at y 6.4 and 25.6, ~36° off the spine.</td></tr>
+        <tr><td>Core</td><td class="num">(9.5, 16)</td><td>Sits on the spine at the optical centre, not the geometric one.</td></tr>
+        <tr><td>Lockup gap</td><td class="num">7.6</td><td>Mark ink edge to wordmark ink edge.</td></tr>
+        <tr><td>Lockup ratio</td><td class="num">4.589 : 1</td><td>124.826 × 27.2 — e.g. 147 × 32, 1175 × 256.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <p>The mark is optically centred, not mathematically. The core hangs off the left of the spine,
+    which pulls the ink box left of the canvas centre — the generator shifts it back by 1.15 units.</p>
+  </div>
+</section>
+
+<section id="palette">
+  <h2>Palette</h2>
+  <p>The core is always ember. It is the same accent the site uses, defined in
+  <code>src/styles/custom.css</code> — the icon set introduces no new colour.</p>
+  <div class="palette">
+    <div class="chip"><div class="fill" style="background:#dc6428"></div><div class="meta"><b>#DC6428</b><span>Ember — the core, on light grounds</span></div></div>
+    <div class="chip"><div class="fill" style="background:#e0743e"></div><div class="meta"><b>#E0743E</b><span>Ember Lit — the core, on dark grounds</span></div></div>
+    <div class="chip"><div class="fill" style="background:#17181c"></div><div class="meta"><b>#17181C</b><span>Ink — structure on light, ground on dark</span></div></div>
+    <div class="chip"><div class="fill" style="background:#edeef3"></div><div class="meta"><b>#EDEEF3</b><span>Chalk — structure on dark grounds</span></div></div>
+    <div class="chip"><div class="fill" style="background:#888c96"></div><div class="meta"><b>#888C96</b><span>Mist — supporting type only, never the mark</span></div></div>
+  </div>
+</section>
+
+<section id="files">
+  <h2>Files</h2>
+
+  <h3>Favicon</h3>
+  <div class="files">
+    <div class="file">
+      <div class="thumb"><img src="./favicon.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/favicon.svg">favicon.svg</button>
+        <p class="desc">Primary favicon. Switches structure colour with the OS scheme.</p>
+        <span class="dim">SVG · 32 grid</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./favicon-48x48.png" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/favicon.ico">favicon.ico</button>
+        <p class="desc">Fallback for clients that ignore SVG favicons.</p>
+        <span class="dim">ICO · packs 16 / 32 / 48</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./favicon-32x32.png" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/favicon-32x32.png">favicon-{16,32,48}x*.png</button>
+        <p class="desc">The individual rasters packed inside the .ico.</p>
+        <span class="dim">PNG · 16 / 32 / 48</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>App &amp; PWA</h3>
+  <div class="files">
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./icon-256.png" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/icon-256.png">icon-{64,128,192,256,512}.png</button>
+        <p class="desc">Transparent ground, ink structure. For light contexts.</p>
+        <span class="dim">PNG · 64 → 512</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--dark"><img src="./icon-512-inverse.png" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/icon-512-inverse.png">icon-{192,512}-inverse.png</button>
+        <p class="desc">Chalk structure for dark contexts — the standard set disappears there.</p>
+        <span class="dim">PNG · 192, 512</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb"><img src="./apple-touch-icon.png" alt="" style="border-radius:22%"></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/apple-touch-icon.png">apple-touch-icon.png</button>
+        <p class="desc">Opaque ink ground — iOS composites transparency onto black.</p>
+        <span class="dim">PNG · 180 × 180</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb"><img src="./icon-maskable-512.png" alt="" class="round"></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/icon-maskable-512.png">icon-maskable-512.png</button>
+        <p class="desc">Android maskable, shown here under the circle crop. Content stays inside the centre 80%.</p>
+        <span class="dim">PNG · 512 × 512</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Vector marks</h3>
+  <div class="files">
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./koredb-mark.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-mark.svg">koredb-mark.svg</button>
+        <p class="desc">Vector mark for light grounds.</p>
+        <span class="dim">SVG</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--dark"><img src="./koredb-mark-inverse.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-mark-inverse.svg">koredb-mark-inverse.svg</button>
+        <p class="desc">Vector mark for dark grounds.</p>
+        <span class="dim">SVG</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./koredb-mark-mono.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-mark-mono.svg">koredb-mark-mono.svg</button>
+        <p class="desc">Single colour via <code>currentColor</code> — inherits the surrounding text colour when inlined.</p>
+        <span class="dim">SVG</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Lockups</h3>
+  <div class="files">
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./koredb-logo.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-logo.svg">koredb-logo.svg</button>
+        <p class="desc">Mark + wordmark. Mirrored into <code>src/assets/logo/</code> for the site header.</p>
+        <span class="dim">SVG · 147 × 32</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--dark"><img src="./koredb-logo-inverse.svg" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-logo-inverse.svg">koredb-logo-inverse.svg</button>
+        <p class="desc">Lockup for dark grounds.</p>
+        <span class="dim">SVG · 147 × 32</span>
+      </div>
+    </div>
+    <div class="file">
+      <div class="thumb thumb--light"><img src="./koredb-logo.png" alt=""></div>
+      <div class="body">
+        <button class="name" data-copy="/icons/koredb-logo.png">koredb-logo{,-inverse}.png</button>
+        <p class="desc">Raster lockup for contexts that can't take SVG.</p>
+        <span class="dim">PNG · 1175 × 256</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Social</h3>
+  <div class="files">
+    <div class="file" style="grid-column: span 2">
+      <div class="thumb" style="height:150px"><img src="../img/og.png" alt="" style="max-width:92%;max-height:136px"></div>
+      <div class="body">
+        <button class="name" data-copy="/img/og.png">../img/og.png</button>
+        <p class="desc">Open Graph / Twitter card. Referenced by the <code>og:image</code> and <code>twitter:image</code> tags in <code>astro.config.mjs</code>.</p>
+        <span class="dim">PNG · 1200 × 630</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usage">
+  <h2>Usage</h2>
+
+  <h3>Already wired up</h3>
+  <p>These are live in <code>astro.config.mjs</code> — listed so you know what's there, not as
+  something to add again.</p>
+  <div class="code">
+    <button class="copy" data-copy-target="cfg">Copy</button>
+    <pre id="cfg">starlight({
+  favicon: "/icons/favicon.svg",
+  logo: {
+    light: "/src/assets/logo/koredb-logo.svg",
+    dark: "/src/assets/logo/koredb-logo-inverse.svg",
+    replacesTitle: true,
+  },
+  head: [
+    { tag: "link", attrs: { rel: "icon", href: base + "/icons/favicon.ico",
+        sizes: "16x16 32x32 48x48" } },
+    { tag: "link", attrs: { rel: "apple-touch-icon", sizes: "180x180",
+        href: base + "/icons/apple-touch-icon.png" } },
+  ],
+})</pre>
+  </div>
+
+  <h3>Referencing from docs</h3>
+  <p>Write the path from the site root. The site is served under a base path, and
+  <code>public/fix-base.js</code> prefixes <code>src</code> and <code>href</code> attributes at
+  runtime — so do <em>not</em> hard-code the base yourself.</p>
+  <div class="code">
+    <button class="copy" data-copy-target="md">Copy</button>
+    <pre id="md">&lt;img src="/icons/koredb-mark.svg" width="32" alt="KoreDB" /&gt;
+
+![KoreDB](/icons/koredb-mark.svg)</pre>
+  </div>
+
+  <h3>Inlining the mono mark</h3>
+  <p>Paste the contents of <code>koredb-mark-mono.svg</code> straight into markup and it takes the
+  colour of whatever text surrounds it — useful in buttons, nav items, and prose.</p>
+  <div class="code">
+    <button class="copy" data-copy-target="mono">Copy</button>
+    <pre id="mono">.badge svg { width: 1.25em; height: 1.25em; color: var(--sl-color-text-accent); }</pre>
+  </div>
+
+  <h3>Regenerating</h3>
+  <p>Change the geometry in <code>scripts/generate-icons.ts</code> and run the generator. It rewrites
+  every file listed above, plus the two lockups in <code>src/assets/logo/</code> and the social card.</p>
+  <div class="code">
+    <button class="copy" data-copy-target="gen">Copy</button>
+    <pre id="gen">yarn generate-icons</pre>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>Rules</h2>
+
+  <h3>Clear space</h3>
+  <p>Keep free space around the lockup equal to the height of the core — a quarter of the mark's
+  height. Nothing crosses it: no type, no rules, no image edges.</p>
+
+  <h3>Minimum size</h3>
+  <p>The mark holds down to <strong>16px</strong> using the small cut. The lockup stops working below
+  <strong>96px</strong> wide (about 21px tall) — below that, drop the wordmark and use the mark alone.</p>
+
+  <h3>Don't</h3>
+  <ul>
+    <li>Recolour the core. It is ember, always — that's the one fixed point in the system.</li>
+    <li>Rebuild the lockup by hand. The gap and the baseline are computed; typing it out by eye will drift.</li>
+    <li>Use the standard icon set on a dark ground. Reach for the <code>-inverse</code> files instead.</li>
+    <li>Add effects — shadows, gradients, outlines. The mark is flat by design.</li>
+  </ul>
+
+  <h3>Wordmark</h3>
+  <p>"KoreDB" is set in <a href="https://fonts.google.com/specimen/Archivo">Archivo</a> SemiBold and
+  converted to outlines in <code>scripts/outlines.json</code>, so no font is fetched at build or
+  render time. Archivo is licensed under the
+  <a href="https://openfontlicense.org/">SIL Open Font License 1.1</a>, which permits this use.</p>
+</section>
+
+<footer>
+  Generated by <code>scripts/generate-icons.ts</code>. This page lives at
+  <code>public/icons/index.html</code> and is maintained by hand.
+</footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+<script>
+(function () {
+  var toast = document.getElementById("toast");
+  var timer;
+
+  function flash(message) {
+    toast.textContent = message;
+    toast.classList.add("on");
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove("on"); }, 1400);
+  }
+
+  function copy(text, label) {
+    if (!navigator.clipboard) { flash("Clipboard unavailable"); return; }
+    navigator.clipboard.writeText(text).then(
+      function () { flash(label); },
+      function () { flash("Copy failed"); }
+    );
+  }
+
+  document.querySelectorAll("[data-copy]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      copy(el.getAttribute("data-copy"), "Copied " + el.getAttribute("data-copy"));
+    });
+  });
+
+  document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = document.getElementById(btn.getAttribute("data-copy-target"));
+      if (pre) copy(pre.textContent, "Copied snippet");
+    });
+  });
+})();
+</script>
+</body>
+</html>
