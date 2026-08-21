@@ -85,7 +85,7 @@ function generateMarkdown(node, depth = 0) {
     } else {
       // Output file as a Markdown link
       const relativePath = path.relative(docsDir, child.filePath);
-      const urlPath = relativePath.replace(/\.(md|mdx)$/, '');
+      const urlPath = relativePath.replace(/\.(md|mdx)$/, '').split(path.sep).join('/');
       const fullUrl = `${baseUrl}/${urlPath}`;
       content += `- [${child.title}](${fullUrl}): ${child.title}\n`;
     }
