@@ -6,6 +6,12 @@ description: "Use KoreDB embedded graph database in Node.js applications with th
 import { LinkCard } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
+Install the scoped npm package:
+
+```bash
+npm install @koredb/koredb
+```
+
 See the following link for the full documentation of the Node.js API.
 
 <LinkCard
@@ -25,7 +31,7 @@ and is more commonly used when building KoreDB applications in Node.js.
 The asynchronous API is commonly used when writing KoreDB applications in Node.js.
 
 ```js
-const koredb = require("koredb");
+const koredb = require("@koredb/koredb");
 
 (async () => {
   // Create an empty on-disk database and connect to it
@@ -65,7 +71,7 @@ This is useful for running KoreDB in a synchronous context, such as debugging or
 where async operations are not desired.
 
 ```js
-const koredb = require("koredb");
+const koredb = require("@koredb/koredb");
 
 // Create an empty on-disk database and connect to it
 const db = new koredb.Database("example.koredb");

@@ -16,8 +16,8 @@ export const CODE_BLOCKS = {
     <artifactId>koredb</artifactId>
     <version>${version}</version>
 </dependency>`,
-        groovy: `implementation 'com.koredb:koredb:${version}'`,
-        kotlin: `implementation("com.koredb:koredb:${version}")`,
+        groovy: `implementation files('libs/koredb_java.jar')`,
+        kotlin: `implementation(files("libs/koredb_java.jar"))`,
         gradle: `plugins {
     id 'java'
     id 'application'
@@ -29,7 +29,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation 'com.koredb:koredb:${version}'
+    implementation files('libs/koredb_java.jar')
 }`,
 },
 swift:`import PackageDescription
@@ -270,7 +270,7 @@ f.since: [[2020,2020,2021,2022]]
 
 ```js
 // main.js
-const koredb = require("koredb");
+const koredb = require("@koredb/koredb");
 
 (async () => {
   // Create an empty on-disk database and connect to it
@@ -312,7 +312,18 @@ const koredb = require("koredb");
 
 <TabItem label="Java">
 
-KoreDB's Java client library is available on [Maven Central](https://central.sonatype.com/artifact/com.koredb/koredb). You can add the following snippet to your `pom.xml` to get it installed:
+Obtain a JAR from the [0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+when available, or build the Java binding from that source tag with `make java`, as described
+in the [installation guide](/installation/#java). Copy the resulting
+`tools/java_api/build/koredb_java.jar` into your application's `libs/` directory.
+
+For Maven, install that JAR into your local repository before adding the dependency:
+
+```bash
+mvn install:install-file -Dfile=libs/koredb_java.jar -DgroupId=com.koredb -DartifactId=koredb -Dversion=0.11.3 -Dpackaging=jar
+```
+
+Then add the following snippet to your `pom.xml`:
 
 <Code code={CODE_BLOCKS.java.maven} lang="xml"/>
 
@@ -329,6 +340,8 @@ data into the database for the given example.
 
 ```
 ├── build.gradle
+├── libs
+│   └── koredb_java.jar
 ├── src/main
 │   ├── java
 │   │   └── Main.java

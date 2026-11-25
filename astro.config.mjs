@@ -11,7 +11,7 @@ const cypherGrammar = JSON.parse(
 );
 
 const repoName = process.env.REPO_NAME || "docs";
-const groupName = process.env.REPO_OWNER || "bighorndb";
+const groupName = process.env.REPO_OWNER || "koredb";
 const domain = `${groupName}.github.io`;
 const site = `https://${domain}`;
 const base = `/${repoName}`;

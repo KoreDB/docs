@@ -25,8 +25,12 @@ Medicine, and Economics are in the dataset.
 To run the code examples below, you can install the following dependencies:
 ```bash
 uv init
-uv add koredb polars pyarrow networkx numpy scipy
+uv add polars pyarrow networkx numpy scipy
 ```
+
+Install KoreDB into the same environment from the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3), following the
+[Python installation instructions](/installation/#python).
 
 ## Create the graph
 

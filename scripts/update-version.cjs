@@ -1,10 +1,10 @@
-const GITHUB_API_URL = "https://api.github.com/repos/KoreDB/koredb/releases/latest";
+const GITHUB_API_URL = "https://api.github.com/repos/KoreDB/koredb/releases/tags/0.11.3";
 const fs = require('fs/promises');
 const path = require('path');
 
 (async () => {
     try {
-        console.log("Fetching latest version from GitHub...");
+        console.log("Fetching the documented 0.11.3 release from GitHub...");
         const response = await fetch(GITHUB_API_URL);
         if (!response.ok) {
             throw new Error(`GitHub API request failed: ${response.status} ${response.statusText}`);
@@ -16,7 +16,7 @@ const path = require('path');
         }
         version = version.trim();
         version = version.startsWith('v') ? version.substring(1) : version;
-        console.log(`Latest version is ${version}`);
+        console.log(`Documented version is ${version}`);
         console.log("Updating version.json...");
         const pathToJson = path.resolve(path.join(__dirname, "..", "src", "version.json"));
         console.log("Path to version.json: ", pathToJson);

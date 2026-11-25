@@ -2,9 +2,24 @@
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
+Read the [KoreDB documentation](https://koredb.github.io/docs/).
+
 This documentation site is built with [Astro](https://astro.build) and
 [Starlight](https://starlight.astro.build). The sections below describe the site's structure and
 the commands for installation, local development and build instructions.
+
+## Acknowledgements
+
+KoreDB is derived from [Kuzu](https://github.com/kuzudb/kuzu), initially developed by
+Kùzu Inc. and released under the [MIT License](https://github.com/kuzudb/kuzu/blob/master/LICENSE).
+This documentation builds on the Kuzu documentation. We thank the Kuzu team and contributors
+for their work. The documentation is distributed under [CC BY-SA 4.0](LICENSE).
+
+## Storage Format Compatibility
+
+**KoreDB will always maintain compatibility with the Kuzu 0.11.x storage format.**
+This commitment applies to all future KoreDB releases. Storage changes must preserve
+compatibility with existing Kuzu 0.11.x database files.
 
 ## 🚀 Project Structure
 

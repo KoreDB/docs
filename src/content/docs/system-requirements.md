@@ -5,20 +5,26 @@ description: Hardware and software requirements for running KoreDB graph databas
 
 ## CLI, C, and C++
 
-The KoreDB CLI and the C and C++ APIs are pre-compiled for:
+For CLI and C/C++ binaries, check the assets attached to the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3).
+If no matching binary is attached, follow the [source build instructions](/installation).
+The supported platforms include:
 - **macOS >= 11.0**, as a universal binary that supports both Intel-based and ARM-based Macs.
 - **Linux**, as a universal binary that supports both x86-64 and aarch64 architectures and supports most modern Linux distributions such as **RHEL/CentOS/Rocky Linux/Oracle Linux 8.0 or later and Ubuntu 22.04 or later**.
 - **Windows**, as a universal binary that supports both x86-64 and aarch64 architectures and supports most modern Windows versions such as **Windows 10 and 11**.
 
 ## Python
 
-KoreDB's Python API wheel has been pre-compiled for **CPython 3.7 to 3.11**. Compatibility for macOS and Windows is
-the same as the pre-compiled C++ API (i.e. macOS >= 11.0, Windows 10 and 11). For Linux, the pre-compiled wheels follow
-the [`manylinux_2_28`](https://github.com/pypa/manylinux) standard for both x86-64 and aarch64 architectures.
+Python package availability is determined by the assets attached to the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3).
+A wheel must match your Python version, operating system, and architecture.
+The release currently has no Python wheels; follow the
+[Python source installation instructions](/installation/#python) and the
+[build prerequisites](/developer-guide).
 
 ## Node.js
 
-KoreDB's Node.js API is based on **Node-API version 5**. For a list of compatible Node.js versions, please refer to [the official documentation](https://nodejs.org/api/n-api.html#node-api-version-matrix). The native module is pre-compiled for all supported platforms and will be automatically installed when you run `npm install koredb`. The OS compatibility is the same as the pre-compiled CLI, C and C++ APIs.
+KoreDB's Node.js API is based on **Node-API version 6**. For a list of compatible Node.js versions, please refer to [the official documentation](https://nodejs.org/api/n-api.html#node-api-version-matrix). The native module is pre-compiled for all supported platforms and will be automatically installed when you run `npm install @koredb/koredb`. The OS compatibility is the same as the pre-compiled CLI, C and C++ APIs.
 
 ## Java and Android
 

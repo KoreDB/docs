@@ -6,6 +6,12 @@ template: doc
 
 Welcome to the KoreDB docs!
 
+:::note[Storage format compatibility]
+**KoreDB will always maintain compatibility with the Kuzu 0.11.x storage format.**
+This commitment applies to all future KoreDB releases. Storage changes must preserve
+compatibility with existing Kuzu 0.11.x database files.
+:::
+
 KoreDB is an embedded graph database built for query speed and scalability. It is optimized for
 handling complex join-heavy analytical workloads on very large graphs and has the following core features:
 
@@ -18,6 +24,13 @@ handling complex join-heavy analytical workloads on very large graphs and has th
 - Multi-core query parallelism
 - Serializable ACID transactions
 
+## Origins and acknowledgements
+
+KoreDB is derived from [Kuzu](https://github.com/kuzudb/kuzu), initially developed by
+Kùzu Inc. and released under the [MIT License](https://github.com/kuzudb/kuzu/blob/master/LICENSE).
+We thank the Kuzu team and contributors for the database engine and documentation
+on which KoreDB builds.
+
 ## Why KoreDB?
 
 Although there are many graph database management systems (GDBMSs) in the market today,
@@ -27,10 +40,9 @@ Below, we list some of the key reasons why you should consider using KoreDB.
 
 ### Performance and scalability
 
-KoreDB is a state-of-the-art graph DBMS that came out of state-of-the-art academic research and is built by a
-core team of database experts who relentlessly focus on scalability and performance.
-Its founding engineers have co-authored several cutting-edge technical papers and articles on storing
-and querying large graphs.
+KoreDB builds on Kuzu's research-driven design for scalable graph analytics.
+The upstream Kuzu team's work on storing and querying large graphs provides the foundation
+for KoreDB's performance and scalability.
 
 ### Usability
 

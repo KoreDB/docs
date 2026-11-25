@@ -4,21 +4,6 @@ description: "Use KoreDB embedded graph database in C applications with the offi
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import {version} from '../../../version.json';
-import { Code } from 'astro-expressive-code/components';
-
-export const CMAKE_CONTENT =`cmake_minimum_required(VERSION 3.11)
-project(example LANGUAGES C)
-ExternalProject_Add(koredb-prebuilt
-    URL https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-linux-x86_64.tar.gz
-)
-ExternalProject_Get_Property(koredb-prebuilt SOURCE_DIR)
-add_library(koredb SHARED IMPORTED)
-add_dependencies(koredb koredb-prebuilt)
-set_target_properties(koredb PROPERTIES IMPORTED_LOCATION ${"${SOURCE_DIR}"}/libkoredb.so)
-target_include_directories(koredb INTERFACE ${"${SOURCE_DIR}"})
-add_executable(example main.c)
-target_link_libraries(example koredb)`
 
 See the following link for the full documentation of the C library API.
 
@@ -33,8 +18,9 @@ See the following link for the full documentation of the C library API.
 
 See [Installation](/installation) and [Get Started](/get-started) for simple manual instructions for building with the C library.
 
-Alternatively, here is an example configuration for integrating the pre-built library into a CMake project (substitute `URL` and `URL_HASH` and `libkoredb.so` as appropriate for your platform).
-<Code code={CMAKE_CONTENT} lang="cmake"/>
+Use library assets from the [0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+when available. That release currently has no C/C++ library assets; build the library from
+the same source tag using the following CMake example.
 
 ### Linking against KoreDB when built from source
 
@@ -45,13 +31,15 @@ It's recommended that you use CMake if you want to link to the koredb static lib
 
 The following example uses [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html) to download and build koredb as a dependency within a CMake project, and links it either statically or dynamically to an example executable (which can be configured with the `EXAMPLE_SHARED` option). See [Get Started](/get-started) for an example of `main.c`.
 ```cmake
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15)
 project(example LANGUAGES C CXX)
 set(BUILD_SHELL FALSE)
 include(FetchContent)
 FetchContent_Declare(koredb
-    URL https://github.com/KoreDB/koredb/archive/refs/tags/v0.5.0.zip
-    URL_HASH SHA256=47ff308079cbbfeccc38eeb1c5f455a8c00f9294034141b9084387518f0bbed9
+    GIT_REPOSITORY https://github.com/KoreDB/koredb.git
+    GIT_TAG 0.11.3
+    GIT_SHALLOW TRUE
+    GIT_SUBMODULES ""
 )
 FetchContent_MakeAvailable(koredb)
 add_executable(example main.c)

@@ -1,279 +1,163 @@
 ---
 title: Install KoreDB
-description: Installation guide for KoreDB graph database across different platforms and programming languages with package managers.
+description: Install KoreDB from the 0.11.3 GitHub Release or use the scoped Node.js npm package.
 ---
 
-<div class="padauk-regular">
+## Release
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { version } from '../../version.json';
-import { Code } from 'astro-expressive-code/components';
+Use the [KoreDB 0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+for release downloads and source code. The release tag is `0.11.3`, without a `v` prefix.
+Choose assets for your operating system, architecture, and runtime from its **Assets** list.
 
-export const DOWNLOAD_LINKS = {
-  cli:{
-    linux: `# x86-64
-curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-linux-x86_64.tar.gz
-# aarch64
-curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-linux-aarch64.tar.gz
+The release currently contains Node.js packages and native addons. Python wheels, CLI binaries,
+and C/C++ libraries are not attached. For those interfaces, build from the `0.11.3` source tag
+using the instructions below.
 
-tar xzf koredb_cli-*.tar.gz`,
-macos: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-osx-universal.tar.gz
-tar xzf koredb_cli-*.tar.gz
-./koredb`,
-win: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-windows-x86_64.zip`,
-winUrl: `https://github.com/KoreDB/koredb/releases/download/v${version}/koredb_cli-windows-x86_64.zip`,
-  },
-java: `<dependency>
-  <groupId>com.koredb</groupId>
-  <artifactId>koredb</artifactId>
-  <version>${version}</version>
-</dependency>
-`,
-cxx: {
-    linux: `# x86-64
-curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-linux-x86_64.tar.gz
-# aarch64
-curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-linux-aarch64.tar.gz
-
-tar xzf libkoredb-*.tar.gz`,
-    macos: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-osx-universal.tar.gz
-
-tar xzf libkoredb-*.tar.gz`,
-    win: `curl -L -O https://github.com/KoreDB/koredb/releases/download/v${version}/libkoredb-windows-x86_64.zip`
-},
-go: `go get github.com/KoreDB/go-koredb@v${version}`,
-swift: `dependencies: [
-  .package(url: "https://github.com/KoreDB/koredb-swift/", branch: "${version}"),
-],`
-}
-
-KoreDB is an embedded graph database that can be used from the command line and from
-a variety of programming languages. This page shows all the ways you can install KoreDB.
-After installation, you can learn how to run KoreDB by [creating your first graph](/get-started).
-
-:::note[License]
-All source code and pre-compiled binaries of KoreDB are distributed under the [MIT License](https://github.com/KoreDB/koredb/blob/master/LICENSE). By installing and using KoreDB, you acknowledge and agree to these terms.
+:::note[Storage format compatibility]
+**KoreDB will always maintain compatibility with the Kuzu 0.11.x storage format.**
+This commitment applies to all future KoreDB releases.
 :::
 
-## Command Line (Shell)
-
-If you don't need KoreDB embedded in your application, you can use the CLI shell. This is a standalone
-executable with no dependencies that can be used to interact with a KoreDB database using just Cypher.
-
-<Tabs syncKey="cli">
-<TabItem label="Linux">
-
-Use a tool like `curl` to download the latest version of the KoreDB CLI to your local machine.
-<Code code={DOWNLOAD_LINKS.cli.linux} lang="bash" frame="terminal"/>
-
-Now you can run KoreDB from the command line.
-
-```bash
-./koredb
-```
-
-</TabItem>
-
-<TabItem label="macOS">
-
-You can install the KoreDB CLI using Homebrew.
-
-```bash
-brew install koredb
-```
-
-You can now run KoreDB from the command line.
-
-```bash
-koredb
-```
-
-Alternatively, you can download the KoreDB CLI directly.
-
-<Code code={DOWNLOAD_LINKS.cli.macos} lang="bash" frame="terminal"/>
-
-</TabItem>
-
-<TabItem label="Windows">
-
-Use a tool like `curl` to download the latest version of the KoreDB CLI to your local machine. Alternatively,
-simply open 
-<a href={DOWNLOAD_LINKS.cli.winUrl} target="_blank">this URL</a> in your browser.
-
-<Code code={DOWNLOAD_LINKS.cli.win} lang="bash" frame="terminal"/>
-
-Right-click on the `koredb_cli-xxx.zip` file and click on **Extract All**. This will create a directory
-containing a file named `koredb.exe`. Then, right-click on the directory and click "Open in terminal".
-From within the terminal, you can then run `./koredb.exe`.
-
-</TabItem>
-
-<TabItem label="Nix">
-
-On Linux, macOS, and WSL2, you can also use [`Nix`](https://nixos.org/learn) to run the KoreDB CLI.
-
-Run KoreDB in a temporary shell:
-
-```bash
-nix-shell -p koredb
-koredb
-```
-
-Alternatively, you can install KoreDB declaratively using [NixOS](https://nixos.org/manual/nixos/stable/#sec-package-management) or [Home Manager](https://github.com/nix-community/home-manager) configuration:
-
-```nix
-{
-  environment.systemPackages = [ pkgs.koredb ]; // NixOS
-  home.packages = [ pkgs.koredb ];              // Home Manager
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-## Python
-
-You can use `uv`, `pip`, or `nix` to install the KoreDB Python client library.
-The instructions are the same for Linux, macOS, and Windows.
-
-<Tabs syncKey="python-package-manager">
-
-<TabItem label="uv">
-
-```bash
-uv init
-uv add koredb
-```
-
-</TabItem>
-
-<TabItem label="pip">
-
-```bash
-pip install koredb
-```
-
-</TabItem>
-
-<TabItem label="nix">
-
-```bash
-nix-shell -p "python3.withPackages (ps: [ ps.koredb ])"
-```
-
-</TabItem>
-
-</Tabs>
+KoreDB is derived from [Kuzu](https://github.com/kuzudb/kuzu), initially developed by
+K?zu Inc. The engine is distributed under the
+[MIT License](https://github.com/KoreDB/koredb/blob/0.11.3/LICENSE).
 
 ## Node.js
 
-Use `npm` to install the KoreDB Node.js client library.
+Install the scoped npm package:
 
 ```bash
-npm install koredb
+npm install @koredb/koredb
 ```
 
-## Java
-
-The latest stable version is available on [Maven Central](https://central.sonatype.com/artifact/com.koredb/koredb).
-
-<Code code={DOWNLOAD_LINKS.java} lang="xml" frame="terminal"/>
-
-## Rust
-
-Use Cargo to install the KoreDB Rust client library. This will by default build and statically link KoreDB's C++
-library from source. You can also link against the dynamic release libraries, as described in the [crate docs](https://docs.rs/koredb/latest/koredb/#building).
+To select the version corresponding to the release:
 
 ```bash
-cargo add koredb
+npm install @koredb/koredb@0.11.3
 ```
 
-## Go
+Use the same package name in your code:
 
-KoreDB's Go API is a wrapper around the C API of KoreDB. The installation step below assumes that you have
-initialized a Go project that has a `go.mod` file, as described in [the official tutorial](https://go.dev/doc/tutorial/create-module).
+```js
+const koredb = require("@koredb/koredb");
+```
 
-<Code code={DOWNLOAD_LINKS.go} lang="bash" frame="terminal"/>
+```js
+import { Database, Connection } from "@koredb/koredb";
+```
 
-## Swift
+The main package selects the native addon for your platform through optional dependencies.
+The [0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3) also provides
+`koredb-koredb-0.11.3.tgz` and platform addon tarballs. For an offline installation,
+download the main tarball and the matching platform tarball, then pass both local files
+to `npm install`.
 
-To add `koredb-swift` to your Swift project, you can use the Swift package manager.
-1. Add the package to your Package.swift dependencies.
-    <Code code={DOWNLOAD_LINKS.swift} lang="swift" frame="terminal"/>
+## Python
 
-    You can change the branch to a tag to use a specific version (e.g., {version} for the latest stable release or `main` for the latest development version).
+Use the [KoreDB 0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+as the Python package source. If a compatible `.whl` is available in **Assets**, download it
+and install the downloaded file with `python -m pip install` or `uv pip install`, using its
+actual path and filename. The wheel must match your Python version, operating system,
+and architecture.
 
-2. Add `KoreDB` to your target dependencies.
-    ```swift
-    targets: [
-      .target(
-        name: "YourTargetName",
-        dependencies: [
-          .product(name: "KoreDB", package: "koredb-swift"),
-        ]
-      )
-    ]
-    ```
+The release currently has no Python wheels. Install from its source tag as follows.
+This requires Git, Make, CMake 3.15 or later, Python development headers, and a C++20 compiler;
+see the [developer guide](/developer-guide) for platform setup.
+On Windows, use the compiler environment and Make setup described in that guide.
 
-Alternatively, you can add the package through Xcode:
-1. Open your Xcode project.
-2. Go to `File` > `Add Packages Dependencies...`.
-3. Enter the URL of the koredb-swift repository: `https://github.com/KoreDB/koredb-swift`.
-4. Select the version you want to use (e.g., {version} for the latest stable release or `main` for the latest development version).
+```bash
+git clone --branch 0.11.3 --depth 1 https://github.com/KoreDB/koredb.git
+cd koredb/scripts/pip-package
+python -m pip install setuptools wheel
+python package_tar.py
+python -m pip install ./koredb-0.11.3.tar.gz
+```
 
+The generated `koredb-0.11.3.tar.gz` is a Python source distribution; installing it compiles
+the native extension. GitHub's automatically generated source archive is the repository source,
+and must be packaged with `package_tar.py` before installing it with pip.
+
+Verify the installation:
+
+```bash
+python -c "import koredb; print(koredb.__version__)"
+```
+
+The Python import remains `import koredb`.
+
+## Command Line (Shell)
+
+Download a CLI binary for your platform from the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3) when one is available.
+If no CLI asset is attached, build the same release from source after installing the
+[build prerequisites](/developer-guide):
+
+```bash
+git clone --branch 0.11.3 --depth 1 https://github.com/KoreDB/koredb.git
+cd koredb
+make release
+```
+
+The executable is generated in `build/release/tools/shell/` (`koredb` on Linux/macOS,
+`koredb.exe` on Windows). Run it to open an in-memory database, or pass a database path.
+See [Create your first graph](/get-started) for examples.
 
 ## C/C++
 
-Use a tool like `curl` to download the latest version of the KoreDB C/C++ binaries to your local machine.
+Use the [0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+for C/C++ libraries and headers when those assets are available. Otherwise, build and
+install the libraries from the release source:
 
-The KoreDB C++ client is distributed as a so/dylib/dll+lib library file along with a header file (`koredb.hpp`).
-Once you've downloaded and extracted the C++ files into a directory, you can link it to your C++
-program by adding the directory to your build system's search paths.
+```bash
+git clone --branch 0.11.3 --depth 1 https://github.com/KoreDB/koredb.git
+cd koredb
+cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
+cmake --build build/release --config Release
+cmake --install build/release --config Release --prefix ./install
+```
 
-<Tabs syncKey="cli">
+Link your application against the installed library and headers.
+See the [C API guide](/client-apis/c) and [C++ API guide](/client-apis/cpp).
 
-<TabItem label="Linux">
+## Java
 
-<Code code={DOWNLOAD_LINKS.cxx.linux} lang="bash" frame="terminal"/>
+Use a Java package from the [0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
+when available. If no JAR is attached, build the Java binding from the same source tag
+with `make java`, following the [developer guide](/developer-guide).
+Use the resulting JAR as a local dependency in your application; see
+[Create your first graph](/get-started) for a Gradle example.
 
+## Rust
 
-</TabItem>
+Build the Rust client from the source corresponding to the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3):
 
-<TabItem label="macOS">
+```bash
+cargo add koredb --git https://github.com/KoreDB/koredb --tag 0.11.3
+```
 
-<Code code={DOWNLOAD_LINKS.cxx.macos} lang="bash" frame="terminal"/>
+This compiles the C++ library from source and requires the
+[build prerequisites](/developer-guide). See the [Rust API guide](/client-apis/rust).
 
-</TabItem>
+## Go
 
-<TabItem label="Windows">
+The [Go API](/client-apis/go) wraps KoreDB's C API. Use C libraries from the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3), or build them from
+that source tag as described in [C/C++](#cc). The Go wrapper is maintained separately;
+follow its API guide for integration instructions.
 
-<Code code={DOWNLOAD_LINKS.cxx.win} lang="bash" frame="terminal"/>
+## Swift
 
-</TabItem>
-
-</Tabs>
+The [Swift API](/client-apis/swift) is maintained separately. Use the
+[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3) as the engine version
+reference and follow the Swift API guide for wrapper integration.
 
 ## KoreDB Explorer
 
-KoreDB Explorer is a web-based GUI for KoreDB. It allows you to explore and query your KoreDB database
-using a web browser. Refer to the KoreDB Explorer [GitHub repo](https://github.com/KoreDB/explorer)
-for more details.
+KoreDB Explorer is a web-based GUI. Refer to the
+[Explorer repository](https://github.com/KoreDB/explorer) for its separate installation instructions.
 
 ## KoreDB MCP Server
 
-Our [Model Context Protocol](https://modelcontextprotocol.io/introduction) server allows you to expose
-your KoreDB database as a tool that can be used by LLMs and agents.
-Refer to the KoreDB-MCP [GitHub repo](https://github.com/KoreDB/koredb-mcp-server) for more details.
-
-## Nightly Builds
-
-If you want access to the latest features in development, you can use our nightly builds.
-
-- Python: `uv pip install --pre koredb`
-- Node.js: `npm i koredb@next`
-- Java: The latest snapshot version is available on [GitHub Packages](https://github.com/KoreDB/koredb/packages/2258307)
-- For the CLI, C/C++ shared libraries, and Rust crate, the latest nightly versions for each can be
-downloaded from the latest run of [this GitHub Actions workflow](https://github.com/KoreDB/koredb/actions/workflows/build-and-deploy.yml).
-
-</div>
+Refer to the [KoreDB MCP Server repository](https://github.com/KoreDB/koredb-mcp-server)
+for its separate installation instructions.
