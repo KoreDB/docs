@@ -8,11 +8,9 @@ on:
   # Allow manual deployment trigger
   workflow_dispatch:
 
-# Required permissions for GitHub Pages deployment
+# Read repository contents while building the site
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Ensure only one deployment runs at a time
 concurrency:
@@ -20,11 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build and deploy job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -48,14 +42,39 @@ jobs:
           # Disable telemetry data collection
           ASTRO_TELEMETRY_DISABLED: 1
 
-      - name: 📤 Setup GitHub Pages
-        uses: actions/configure-pages@v4
-
       - name: 📋 Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
 
+  # Deploy only after the artifact-producing job has completed. Retrying this
+  # job reuses that artifact instead of uploading another with the same name.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment_retry.outputs.page_url || steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 📤 Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      # Artifact metadata can briefly be unavailable after a successful upload.
+      # Retry deployment once, reusing the artifact, and propagate a second failure.
+      - name: Wait before retrying deployment
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 10
+
+      - name: Retry GitHub Pages deployment
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
