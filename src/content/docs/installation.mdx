@@ -1,6 +1,6 @@
 ---
 title: Install KoreDB
-description: Install KoreDB from the 0.11.3 GitHub Release or use the scoped Node.js npm package.
+description: Install KoreDB from PyPI, npm, or the 0.11.3 GitHub release.
 ---
 
 ## Release
@@ -9,9 +9,8 @@ Use the [KoreDB 0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.
 for release downloads and source code. The release tag is `0.11.3`, without a `v` prefix.
 Choose assets for your operating system, architecture, and runtime from its **Assets** list.
 
-The release currently contains Node.js packages and native addons. Python wheels, CLI binaries,
-and C/C++ libraries are not attached. For those interfaces, build from the `0.11.3` source tag
-using the instructions below.
+The release currently contains Node.js packages and native addons. Build CLI binaries and C/C++
+libraries from the `0.11.3` source tag using the instructions below.
 
 :::note[Storage format compatibility]
 **KoreDB will always maintain compatibility with the Kuzu 0.11.x storage format.**
@@ -54,36 +53,17 @@ to `npm install`.
 
 ## Python
 
-Use the [KoreDB 0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3)
-as the Python package source. If a compatible `.whl` is available in **Assets**, download it
-and install the downloaded file with `python -m pip install` or `uv pip install`, using its
-actual path and filename. The wheel must match your Python version, operating system,
-and architecture.
-
-The release currently has no Python wheels. Install from its source tag as follows.
-This requires Git, Make, CMake 3.15 or later, Python development headers, and a C++20 compiler;
-see the [developer guide](/developer-guide) for platform setup.
-On Windows, use the compiler environment and Make setup described in that guide.
+Install the [KoreDB package from PyPI](https://pypi.org/project/koredb/) with CPython 3.12 or later.
 
 ```bash
-git clone --branch 0.11.3 --depth 1 https://github.com/KoreDB/koredb.git
-cd koredb/scripts/pip-package
-python -m pip install setuptools wheel
-python package_tar.py
-python -m pip install ./koredb-0.11.3.tar.gz
+pip install koredb
 ```
-
-The generated `koredb-0.11.3.tar.gz` is a Python source distribution; installing it compiles
-the native extension. GitHub's automatically generated source archive is the repository source,
-and must be packaged with `package_tar.py` before installing it with pip.
 
 Verify the installation:
 
 ```bash
 python -c "import koredb; print(koredb.__version__)"
 ```
-
-The Python import remains `import koredb`.
 
 ## Command Line (Shell)
 

@@ -22,15 +22,11 @@ scholars who didn't win prizes but were involved in mentoring them. The edges re
 mentor-mentee relationships between the scholars. Laureates who won prizes in Physics, Chemistry,
 Medicine, and Economics are in the dataset.
 
-To run the code examples below, you can install the following dependencies:
+To run the examples, install KoreDB and the other dependencies in the same Python environment:
 ```bash
-uv init
-uv add polars pyarrow networkx numpy scipy
+pip install koredb
+pip install polars pyarrow networkx numpy scipy
 ```
-
-Install KoreDB into the same environment from the
-[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3), following the
-[Python installation instructions](/installation/#python).
 
 ## Create the graph
 

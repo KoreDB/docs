@@ -15,12 +15,9 @@ The supported platforms include:
 
 ## Python
 
-Python package availability is determined by the assets attached to the
-[0.11.3 Release](https://github.com/KoreDB/koredb/releases/tag/0.11.3).
-A wheel must match your Python version, operating system, and architecture.
-The release currently has no Python wheels; follow the
-[Python source installation instructions](/installation/#python) and the
-[build prerequisites](/developer-guide).
+The KoreDB Python package requires standard **CPython 3.12 or later**.
+[PyPI wheels](https://pypi.org/project/koredb/#files) are available for x86-64 and ARM64 on
+Windows, macOS, and glibc-based Linux. Install the package with `pip install koredb`.
 
 ## Node.js
 
