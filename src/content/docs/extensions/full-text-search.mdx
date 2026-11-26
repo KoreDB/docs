@@ -11,7 +11,12 @@ Currently, KoreDB supports creating FTS indexes on only node tables' `STRING` pr
 
 ## Usage
 
-Please see [Install an extension](/extensions#install-an-extension) and [Load an extension](/extensions#load-an-extension) first before getting started.
+:::note[Built in by default]
+The `fts` extension is statically linked and loaded automatically in KoreDB 0.11.3 and default
+native builds, including Release builds and the Node.js package. You can create and query FTS
+indexes immediately. `INSTALL fts` and `LOAD EXTENSION fts` succeed and skip any download or
+duplicate loading. See [Built-in extensions](/extensions#built-in-extensions).
+:::
 
 ### Example dataset
 

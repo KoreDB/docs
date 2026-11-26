@@ -23,7 +23,12 @@ This extension provides the following functions:
 
 ## Usage
 
-Please see [Install an extension](/extensions#install-an-extension) and [Load an extension](/extensions#load-an-extension) first before getting started.
+:::note[Built in by default]
+The `vector` extension is statically linked and loaded automatically in KoreDB 0.11.3 and default
+native builds, including Release builds and the Node.js package. No installation or loading
+is required. Existing `INSTALL vector` and `LOAD EXTENSION vector` statements succeed without
+downloading or loading it again. See [Built-in extensions](/extensions#built-in-extensions).
+:::
 
 ### Example dataset
 
@@ -44,8 +49,6 @@ conn = koredb.Connection(db)
 
 from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("all-MiniLM-L6-v2")
-
-conn.execute("INSTALL vector; LOAD vector;")
 
 conn.execute("CREATE NODE TABLE Book(id SERIAL PRIMARY KEY, title STRING, title_embedding FLOAT[384], published_year INT64);")
 conn.execute("CREATE NODE TABLE Publisher(name STRING PRIMARY KEY);")
@@ -104,8 +107,6 @@ conn = koredb.Connection(db)
 
 conn.execute("INSTALL llm; LOAD llm;")
 os.environ["OPENAI_API_KEY"] = "sk-proj-key" # Replace with your own OpenAI API key
-
-conn.execute("INSTALL vector; LOAD vector;")
 
 conn.execute("CREATE NODE TABLE Book(id SERIAL PRIMARY KEY, title STRING, title_embedding FLOAT[384], published_year INT64);")
 conn.execute("CREATE NODE TABLE Publisher(name STRING PRIMARY KEY);")
@@ -275,9 +276,7 @@ import koredb
 db = koredb.Database("example.koredb")
 conn = koredb.Connection(db)
 
-# Install and load vector extension once again
-conn.execute("INSTALL VECTOR;")
-conn.execute("LOAD VECTOR;")
+# The built-in vector extension is loaded automatically when the database opens.
 
 from sentence_transformers import SentenceTransformer
 # Load a pre-trained embedding generation model
@@ -310,9 +309,7 @@ import koredb
 db = koredb.Database("example.koredb")
 conn = koredb.Connection(db)
 
-# Install and load vector extension once again
-conn.execute("INSTALL VECTOR;")
-conn.execute("LOAD VECTOR;")
+# The built-in vector extension is loaded automatically when the database opens.
 
 conn.execute("INSTALL llm; LOAD llm;")
 os.environ["OPENAI_API_KEY"] = "sk-proj-key" # Replace with your own OpenAI API key

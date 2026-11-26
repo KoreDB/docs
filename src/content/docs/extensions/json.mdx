@@ -13,7 +13,12 @@ with CSV files.
 
 ## Usage
 
-Please see [Install an extension](/extensions#install-an-extension) and [Load an extension](/extensions#load-an-extension) first before getting started.
+:::note[Built in by default]
+The `json` extension is statically linked and loaded automatically in KoreDB 0.11.3 and default
+native builds, including Release builds and the Node.js package. No installation or loading
+is required. Existing `INSTALL json` and `LOAD EXTENSION json` statements succeed without
+downloading or loading it again. See [Built-in extensions](/extensions#built-in-extensions).
+:::
 
 ### Example dataset
 
@@ -520,9 +525,6 @@ it then creates two JSON objects in this column using the `to_json` function, an
 
 Example:
 ```cypher
-INSTALL json;
-LOAD json;
-
 CREATE NODE TABLE Person (id INT64 PRIMARY KEY, description JSON);
 CREATE (p:Person {id: 20, description: to_json({height: 52, age: 32, scores: [1,2,5]})});
 CREATE (p:Person {id: 40, description: to_json({age: 55, scores: [1,32,5,null], name: 'dan'})});
