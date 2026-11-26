@@ -248,21 +248,28 @@ If you would like to know information about loaded extensions in KoreDB, you can
 | Column | Description | Type |
 | ------ | ----------- | ---- |
 | extension name | name of the extension | STRING |
-| extension source | whether the extension is officially supported by the KoreDB team or is developed by a third-party | STRING |
-| extension path | the path to the extension | STRING |
+| extension source | `STATIC LINK` for built-in extensions, `OFFICIAL` for separately loaded official extensions, or `USER` for custom libraries | STRING |
+| extension path | the path to the extension library; blank for built-in extensions | STRING |
 
 ```cypher
 CALL SHOW_LOADED_EXTENSIONS() RETURN *;
 ```
 
 ```table
-┌────────────────┬──────────────────┬─────────────────────────────────────────────────────────────────────────────┐
-│ extension name │ extension source │ extension path                                                              │
-│ STRING         │ STRING           │ STRING                                                                      │
-├────────────────┼──────────────────┼─────────────────────────────────────────────────────────────────────────────┤
-│ FTS            │ OFFICIAL         │ extension/fts/build/libfts.koredb_extension                                   │
-└────────────────┴──────────────────┴─────────────────────────────────────────────────────────────────────────────┘
+┌────────────────┬──────────────────┬────────────────┐
+│ extension name │ extension source │ extension path │
+│ STRING         │ STRING           │ STRING         │
+├────────────────┼──────────────────┼────────────────┤
+│ ALGO           │ STATIC LINK      │                │
+│ FTS            │ STATIC LINK      │                │
+│ JSON           │ STATIC LINK      │                │
+│ VECTOR         │ STATIC LINK      │                │
+└────────────────┴──────────────────┴────────────────┘
 ```
+
+This is the default output for native builds, including Release builds and the Node.js package.
+These four [built-in extensions](/extensions#built-in-extensions) load automatically when
+the database opens. Additional loaded extensions appear as extra rows.
 
 ### SHOW_INDEXES
 If you would like to know information about indexes built in koredb, you can run the `SHOW_INDEXES` function.

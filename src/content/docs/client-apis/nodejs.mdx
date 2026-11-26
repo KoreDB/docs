@@ -19,6 +19,42 @@ See the following link for the full documentation of the Node.js API.
   href="https://koredb.github.io/api-docs/nodejs"
 />
 
+## Built-in extensions
+
+The Node.js native addon includes `algo`, `fts`, `json`, and `vector` by default,
+including when built in **Release mode**. They load automatically when a database opens;
+no extension server, download, `INSTALL`, or `LOAD` is required.
+
+For example, full-text search is available immediately:
+
+```js
+const koredb = require("@koredb/koredb");
+
+(async () => {
+  const db = new koredb.Database(":memory:");
+  const conn = new koredb.Connection(db);
+  try {
+    (await conn.query("CREATE NODE TABLE Document(id INT64 PRIMARY KEY, content STRING)")).close();
+    (await conn.query("CREATE (:Document {id: 1, content: 'graph database search'})")).close();
+    (await conn.query("CALL CREATE_FTS_INDEX('Document', 'contentIdx', ['content'])")).close();
+    const result = await conn.query(
+      "CALL QUERY_FTS_INDEX('Document', 'contentIdx', 'graph') RETURN node.id AS id, score"
+    );
+    console.log(await result.getAll());
+    result.close();
+  } finally {
+    await conn.close();
+    await db.close();
+  }
+})();
+```
+
+Existing `INSTALL fts` and `LOAD EXTENSION fts` statements succeed with an informational
+result and skip any download or duplicate loading. This also applies to `algo`, `json`,
+and `vector`, through both sync and async APIs, including prepared statements and
+multi-statement queries. Use `CALL SHOW_LOADED_EXTENSIONS() RETURN *;` to verify that
+their source is `STATIC LINK`. See [Built-in extensions](/extensions#built-in-extensions).
+
 ## Sync and Async APIs
 
 KoreDB provides both a sync and an async Node.js API. The async API is the default

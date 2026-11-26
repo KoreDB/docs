@@ -1,19 +1,47 @@
 ---
 title: Extensions
-description: Dynamically extend KoreDB's capabilities with official extensions for JSON, vector search, full-text search, and more.
+description: Use KoreDB's default built-in extensions for graph algorithms, full-text search, JSON, and vector search, or load additional extensions.
 ---
 
-KoreDB has an extension API that is designed to dynamically extend its capabilities. Extensions allow
-you to dynamically load the functionality you need at runtime, while helping limit the size of
-the core KoreDB library.
+KoreDB includes four extensions by default and provides an extension API for loading additional functionality at runtime.
+
+## Built-in extensions
+
+KoreDB 0.11.3 and default native source builds, including **Release builds** and the
+**Node.js package** (`@koredb/koredb`), statically link these extensions:
+
+| Extension | Functionality |
+| --------- | ------------- |
+| [algo](/extensions/algo) | Graph algorithms |
+| [fts](/extensions/full-text-search) | Full-text search using BM25 |
+| [json](/extensions/json) | JSON types, functions, and file operations |
+| [vector](/extensions/vector) | Vector indexes and similarity search |
+
+They are part of the database library and load automatically when a database is opened.
+No extension download, extension server, `INSTALL`, or `LOAD` is required.
+
+Existing scripts can keep their installation and loading statements. For a built-in extension,
+these statements succeed with an informational result and skip downloading or loading it again:
+
+```cypher
+INSTALL fts;
+LOAD EXTENSION fts;
+```
+
+The same behavior applies to `algo`, `json`, and `vector`. Extension names are case-insensitive,
+and the short form `LOAD fts` also succeeds. In Node.js, this works through both the async
+and sync APIs, including prepared statements and multi-statement queries.
+
+Use `CALL SHOW_LOADED_EXTENSIONS() RETURN *;` to inspect the actual build. Built-in extensions
+have an `extension source` of `STATIC LINK` and no external library path.
+
+Custom builds can have a different extension set. The standalone extension artifact build
+(`BUILD_EXTENSION_RELEASE=TRUE`) is separate from a normal Release database or Node.js build.
 
 :::caution[Note]
 KoreDB no longer provides an official extensions server, from where you can directly install the official extensions.
 
-If you've upgraded to the latest version v0.11.3, KoreDB has pre-installed and pre-loaded four commonly used extensions (`algo`, `fts`, `json`, `vector`) for you.
-You do not need to manually INSTALL or LOAD these extensions.
-
-For KoreDB versions before v0.11.3, or to install extensions that haven't been pre-installed into v0.11.3, you have to set up a local extension server.
+For older versions or extensions that are not built in, you have to set up a local extension server.
 The instructions of setting up a local extension server can be found [here](/extensions#host-your-own-extension-server).
 :::
 
@@ -21,22 +49,22 @@ The instructions of setting up a local extension server can be found [here](/ext
 
 The following extensions are currently implemented:
 
-| Extension | Description |
-|----------|----------|
-| [algo](/extensions/algo) | Graph algorithms |
-| [azure](/extensions/azure) | Scan from Azure Blob Storage and Azure Data Lake Storage (ADLS) |
-| [delta](/extensions/attach/delta) | Scan data from Delta Lake tables |
-| [duckdb](/extensions/attach/duckdb) | Scan data from an attached DuckDB database |
-| [fts](/extensions/full-text-search) | Perform full-text search using BM25 |
-| [httpfs](/extensions/httpfs) | Read and write files over HTTP(S) protocol. Also used for [attaching a remote KoreDB database](/extensions/attach/koredb). |
-| [iceberg](/extensions/attach/iceberg) | Scan data from Iceberg tables |
-| [json](/extensions/json) | Scan and manipulate JSON data |
-| [llm](/extensions/llm) | Generate text embeddings using external provider APIs |
-| [neo4j](/extensions/neo4j) | Migrate data from Neo4j into KoreDB |
-| [postgres](/extensions/attach/postgres) | Scan data from an attached PostgreSQL database |
-| [sqlite](/extensions/attach/sqlite) | Scan data from an attached SQLite database |
-| [unity](/extensions/attach/unity) | Scan data from Unity Catalog tables |
-| [vector](/extensions/vector) | Perform vector similarity search |
+| Extension | Built in by default | Description |
+|----------|----------|----------|
+| [algo](/extensions/algo) | Yes | Graph algorithms |
+| [azure](/extensions/azure) | No | Scan from Azure Blob Storage and Azure Data Lake Storage (ADLS) |
+| [delta](/extensions/attach/delta) | No | Scan data from Delta Lake tables |
+| [duckdb](/extensions/attach/duckdb) | No | Scan data from an attached DuckDB database |
+| [fts](/extensions/full-text-search) | Yes | Perform full-text search using BM25 |
+| [httpfs](/extensions/httpfs) | No | Read and write files over HTTP(S) protocol. Also used for [attaching a remote KoreDB database](/extensions/attach/koredb). |
+| [iceberg](/extensions/attach/iceberg) | No | Scan data from Iceberg tables |
+| [json](/extensions/json) | Yes | Scan and manipulate JSON data |
+| [llm](/extensions/llm) | No | Generate text embeddings using external provider APIs |
+| [neo4j](/extensions/neo4j) | No | Migrate data from Neo4j into KoreDB |
+| [postgres](/extensions/attach/postgres) | No | Scan data from an attached PostgreSQL database |
+| [sqlite](/extensions/attach/sqlite) | No | Scan data from an attached SQLite database |
+| [unity](/extensions/attach/unity) | No | Scan data from Unity Catalog tables |
+| [vector](/extensions/vector) | Yes | Perform vector similarity search |
 
 ## Using extensions in KoreDB
 
@@ -52,12 +80,8 @@ CALL SHOW_OFFICIAL_EXTENSIONS() RETURN *;
 
 ### Install an extension
 
-KoreDB requires you to install the extension before loading and using it.
-
-:::caution[Note]
-In the latest version v0.11.3 KoreDB has pre-installed four commonly used extensions (`algo`, `fts`, `json`, `vector`) for you.
-You do not need to manually INSTALL these extensions.
-:::
+Only extensions that are not [built in](/extensions#built-in-extensions) require installation.
+For built-in extensions, `INSTALL` succeeds without downloading anything, even if a `FROM` repository is specified.
 
 Official extensions can be installed from a [local extension server](/extensions#host-your-own-extension-server) by running the `INSTALL` command.
 
@@ -72,30 +96,31 @@ If you run the `INSTALL` command for an extension that is already installed,
 the second install command will not perform any action.
 
 If you want to re-download an extension for any reason, for example if the extension is not working
-properly, you can use the `UPDATE` command:
+properly, you can use the `UPDATE` command for a separately installed extension:
 
 ```cypher
 UPDATE <EXTENSION_NAME>;
 ```
 
+Built-in extensions are updated by upgrading the KoreDB package or rebuilding the database library.
+`UPDATE` and `FORCE INSTALL` also skip downloads for built-in extensions.
+
 ### Load an extension
 
-:::caution[Note]
-In the latest version v0.11.3, KoreDB has pre-loaded four commonly used extensions (`algo`, `fts`, `json`, `vector`) for you.
-You do not need to manually LOAD these extensions anymore.
-:::
+Built-in extensions load automatically. `LOAD` and `LOAD EXTENSION` for their names succeed
+without loading another library or registering the extension twice.
 
-You must load extensions before you can use them:
+You must load separately installed extensions before you can use them:
 
 ```cypher
 LOAD <EXTENSION_NAME>;
 ```
 
 Official extensions can be loaded by simply specifying the extension name.
-For example, to load the `json` extension:
+For example, after installing the `httpfs` extension:
 
 ```cypher
-load json;
+LOAD EXTENSION httpfs;
 ```
 If you want to load an extension you have compiled yourself, you can specify the path to the compiled library.
 For example, to load a self-compiled `json` extension:
@@ -114,19 +139,21 @@ CALL SHOW_LOADED_EXTENSIONS() RETURN *;
 
 :::note[Note]
 Extensions are scoped to the session within which they are loaded. Thus, the `LOAD` command must be
-executed for every new CLI session or client script invocation.
+executed for every new CLI session or client script invocation for separately installed extensions.
+Built-in extensions are loaded automatically in each database instance.
 :::
 
 
 ### Uninstall an extension
 
-You can uninstall extensions if you don't need them anymore by using the `UNINSTALL` command:
+You can uninstall separately installed extensions if you don't need them anymore by using the `UNINSTALL` command:
 
 ```cypher
 UNINSTALL <EXTENSION_NAME>;
 ```
 :::note[Note]
 Uninstalling a currently loaded extension won't affect the running database instance, but you won't be able to load it again in a new KoreDB instance until it's reinstalled.
+Built-in extensions are part of the database library and cannot be removed with `UNINSTALL`.
 :::
 
 ### Host your own extension server
